@@ -5,7 +5,7 @@ Timeseries data is special and has to be processed and fed to algorithms in a sp
 defines a class that is able to handle a wide variety of timeseries data problems.
 """
 from copy import copy as _copy, deepcopy
-from functools import lru_cache
+# from functools import lru_cache
 import inspect
 from typing import Any, Callable, Dict, List, Tuple, Union
 import warnings
@@ -504,7 +504,7 @@ class TimeSeriesDataSet(Dataset):
         return {f"{name}_lagged_by_{lag}": lag for lag in self.lags.get(name, [])}
 
     @property
-    @lru_cache(None)
+    # @lru_cache(None)
     def lagged_variables(self) -> Dict[str, str]:
         """
         Lagged variables.
@@ -519,7 +519,7 @@ class TimeSeriesDataSet(Dataset):
         return vars
 
     @property
-    @lru_cache(None)
+    # @lru_cache(None)
     def lagged_targets(self) -> Dict[str, str]:
         """Subset of `lagged_variables` but only includes variables that are lagged targets."""
         vars = {}
@@ -528,7 +528,7 @@ class TimeSeriesDataSet(Dataset):
         return vars
 
     @property
-    @lru_cache(None)
+    # @lru_cache(None)
     def min_lag(self) -> int:
         """
         Minimum number of time steps variables are lagged.
@@ -542,7 +542,7 @@ class TimeSeriesDataSet(Dataset):
             return min([min(lag) for lag in self.lags.values()])
 
     @property
-    @lru_cache(None)
+    # @lru_cache(None)
     def max_lag(self) -> int:
         """
         Maximum number of time steps variables are lagged.
@@ -603,7 +603,7 @@ class TimeSeriesDataSet(Dataset):
         )
 
     @property
-    @lru_cache(None)
+    # @lru_cache(None)
     def _group_ids_mapping(self) -> Dict[str, str]:
         """
         Mapping of group id names to group ids used to identify series in dataset -
@@ -613,7 +613,7 @@ class TimeSeriesDataSet(Dataset):
         return {name: f"__group_id__{name}" for name in self.group_ids}
 
     @property
-    @lru_cache(None)
+    # @lru_cache(None)
     def _group_ids(self) -> List[str]:
         """
         Group ids used to identify series in dataset.
@@ -1077,7 +1077,7 @@ class TimeSeriesDataSet(Dataset):
         return self.static_reals + self.time_varying_known_reals + self.time_varying_unknown_reals
 
     @property
-    @lru_cache(None)
+    # @lru_cache(None)
     def target_names(self) -> List[str]:
         """
         List of targets.
